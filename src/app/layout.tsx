@@ -14,8 +14,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Blog da Associacao",
-  description: "Noticias, historias e agenda da associacao em uma experiencia visual dinamica.",
+  title: "Blog da Associação",
+  description: "Notícias, histórias e agenda da associação em uma experiência visual dinâmica.",
 };
 
 export default function RootLayout({

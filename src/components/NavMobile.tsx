@@ -7,7 +7,7 @@ const WA_HREF =
 
 const links = [
   { href: "#sobre",       label: "Sobre" },
-  { href: "#inauguracao", label: "Inauguracao" },
+  { href: "#inauguracao", label: "Inauguração" },
   { href: "#atividades",  label: "Atividades" },
   { href: "#galeria",     label: "Galeria" },
   { href: "#contato",     label: "Contato" },
