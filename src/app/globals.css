@@ -218,84 +218,73 @@ img { display: block; max-width: 100%; }
 }
 
 /* ── HERO SLIDER ────────────────────────────────────── */
-/* Wrapper com padding lateral para revelar slides adjacentes */
-.hs-outer {
+.hs-root {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 860px;
   margin-inline: auto;
-  padding: 0 10%;          /* peek: 10% de cada lado fica visível */
-  box-sizing: border-box;
-}
-
-/* Viewport — clipa a faixa mas deixa as bordas vazar via padding pai */
-.hs-viewport {
+  height: clamp(200px, 28vw, 360px);
   overflow: hidden;
+  background: #0a1c4a;
   border-radius: 1rem;
-  box-shadow: 0 4px 24px rgba(13,58,181,0.15);
+  box-shadow: 0 4px 24px rgba(13,58,181,0.13);
 }
-
-/* Faixa deslizante */
-.hs-track {
-  display: flex;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-/* Cada slide ocupa 80% do viewport (os 20% restantes = peek lateral) */
 .hs-slide {
-  position: relative;
-  flex: 0 0 100%;          /* ocupa 100% dentro do viewport clippado */
-  height: clamp(160px, 30vw, 340px);
-  border-radius: 1rem;
-  overflow: hidden;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  opacity: 0.55;
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
 }
-.hs-slide--active { opacity: 1; }
+.hs-slide--active { opacity: 1; pointer-events: auto; }
+
+/* Desktop: cobre toda a área */
 .hs-img { object-fit: cover; }
 
 .hs-caption {
-  position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
-  background: rgba(13,58,181,0.75);
-  color: #fff; font-weight: 700; font-size: 0.82rem;
-  padding: 0.28rem 0.9rem; border-radius: 999px;
+  position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%);
+  background: rgba(13,58,181,0.72);
+  color: #fff; font-weight: 700; font-size: 0.9rem;
+  padding: 0.35rem 1.1rem; border-radius: 999px;
   backdrop-filter: blur(4px);
   white-space: nowrap;
-  pointer-events: none;
 }
-
 .hs-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.22); border: none; color: #fff;
-  font-size: 1.1rem; width: 2rem; height: 2rem;
+  background: rgba(255,255,255,0.2); border: none; color: #fff;
+  font-size: 1.3rem; width: 2.4rem; height: 2.4rem;
   border-radius: 50%; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   backdrop-filter: blur(4px);
   transition: background 0.2s;
   z-index: 10;
 }
-.hs-arrow:hover { background: rgba(255,255,255,0.4); }
-.hs-arrow--left  { left: 0.5rem; }
-.hs-arrow--right { right: 0.5rem; }
-
+.hs-arrow:hover { background: rgba(255,255,255,0.38); }
+.hs-arrow--left  { left: 1rem; }
+.hs-arrow--right { right: 1rem; }
 .hs-dots {
-  display: flex; justify-content: center; gap: 0.4rem;
-  margin-top: 0.75rem;
+  position: absolute; bottom: 0.7rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 0.4rem; z-index: 10;
 }
 .hs-dot {
-  width: 0.45rem; height: 0.45rem; border-radius: 50%;
-  background: rgba(13,58,181,0.25); border: none; cursor: pointer;
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: rgba(255,255,255,0.4); border: none; cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-.hs-dot--on { background: var(--blue-main); transform: scale(1.35); }
+.hs-dot--on { background: #fff; transform: scale(1.35); }
 
+/* Mobile: altura auto baseada na imagem, sem cortar os lados */
 @media (max-width: 600px) {
-  .hs-outer { padding: 0 8%; }
-  .hs-slide { height: clamp(140px, 52vw, 200px); }
-  .hs-caption { font-size: 0.72rem; bottom: 1rem; }
-  .hs-arrow { width: 1.7rem; height: 1.7rem; font-size: 0.95rem; }
+  .hs-root {
+    height: auto;
+    aspect-ratio: 1 / 1;   /* ajuste conforme proporção real das imagens */
+    border-radius: 0.75rem;
+    max-width: calc(100% - 2rem);
+  }
+  .hs-img { object-fit: contain !important; background: #0a1c4a; }
+  .hs-caption { font-size: 0.75rem; bottom: 1.2rem; }
+  .hs-arrow { width: 1.8rem; height: 1.8rem; font-size: 1rem; }
+  .hs-arrow--left  { left: 0.5rem; }
+  .hs-arrow--right { right: 0.5rem; }
 }
 
 /* ── SECTIONS ───────────────────────────────────────── */

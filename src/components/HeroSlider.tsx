@@ -36,31 +36,24 @@ export function HeroSlider() {
   };
 
   return (
-    <div className="hs-outer" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-      <div className="hs-viewport">
+    <div className="hs-root" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+      {slides.map((s, i) => (
         <div
-          className="hs-track"
-          style={{ transform: `translateX(calc(${current} * -80%))` }}
+          key={i}
+          className={`hs-slide${i === current ? " hs-slide--active" : ""}`}
+          aria-hidden={i !== current}
         >
-          {slides.map((s, i) => (
-            <div
-              key={i}
-              className={`hs-slide${i === current ? " hs-slide--active" : ""}`}
-              onClick={() => setCurrent(i)}
-            >
-              <Image
-                src={s.src}
-                alt={s.alt}
-                fill
-                sizes="(max-width:600px) 80vw, 640px"
-                className="hs-img"
-                priority={i === 0}
-              />
-              <div className="hs-caption">{s.alt}</div>
-            </div>
-          ))}
+          <Image
+            src={s.src}
+            alt={s.alt}
+            fill
+            sizes="(max-width:600px) 100vw, 860px"
+            className="hs-img"
+            priority={i === 0}
+          />
+          <div className="hs-caption">{s.alt}</div>
         </div>
-      </div>
+      ))}
 
       <button className="hs-arrow hs-arrow--left"  onClick={prev} aria-label="Anterior">&#8592;</button>
       <button className="hs-arrow hs-arrow--right" onClick={next} aria-label="Próximo">&#8594;</button>

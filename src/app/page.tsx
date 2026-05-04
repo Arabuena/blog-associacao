@@ -114,7 +114,7 @@ export default function Home() {
       </section>
 
       {/* SLIDE DE ATIVIDADES */}
-      <div style={{ padding: "1.5rem 0", background: "var(--white)" }}>
+      <div style={{ padding: "2rem 1.5rem", background: "var(--white)" }}>
         <HeroSlider />
       </div>
 
