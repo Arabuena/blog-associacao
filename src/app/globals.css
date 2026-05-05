@@ -272,15 +272,15 @@ img { display: block; max-width: 100%; }
 }
 .hs-dot--on { background: #fff; transform: scale(1.35); }
 
-/* Mobile: altura auto baseada na imagem, sem cortar os lados */
+/* Mobile: imagens otimizadas para celular, cobrem toda a área */
 @media (max-width: 600px) {
   .hs-root {
     height: auto;
-    aspect-ratio: 1 / 1;   /* ajuste conforme proporção real das imagens */
+    aspect-ratio: 9 / 16;   /* proporção retrato para imagens mobile */
     border-radius: 0.75rem;
     max-width: calc(100% - 2rem);
   }
-  .hs-img { object-fit: contain !important; background: #0a1c4a; }
+  .hs-img { object-fit: cover !important; background: #0a1c4a; }
   .hs-caption { font-size: 0.75rem; bottom: 1.2rem; }
   .hs-arrow { width: 1.8rem; height: 1.8rem; font-size: 1rem; }
   .hs-arrow--left  { left: 0.5rem; }
@@ -343,11 +343,11 @@ img { display: block; max-width: 100%; }
   display: flex; flex-direction: column; gap: 0.4rem;
 }
 /* Reel embed clipped */
-.t-sobre-reel-card { padding: 0; overflow: hidden; }
+.t-sobre-reel-card { padding: 0; overflow: hidden; position: relative; }
 .t-sobre-reel-clip {
   position: relative;
   overflow: hidden;
-  height: 560px;
+  height: 420px;
 }
 .t-sobre-reel-frame {
   position: absolute;

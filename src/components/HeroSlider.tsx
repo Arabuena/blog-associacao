@@ -7,6 +7,12 @@ import hidro from "./OUTROS/slide/hidro.png";
 import karate from "./OUTROS/slide/karate.png";
 import natacao from "./OUTROS/slide/nataco.png";
 
+import hidroMobile    from "./OUTROS/slide-mobile/Hidro.jpeg";
+import informatica    from "./OUTROS/slide-mobile/informatica.jpeg";
+import natacaoMobile  from "./OUTROS/slide-mobile/natacao.jpg";
+import psicanalise    from "./OUTROS/slide-mobile/psicanalise.jpeg";
+import whatsapp       from "./OUTROS/slide-mobile/WhatsApp Image 2026-05-04 at 09.01.06.jpeg";
+
 const slides = [
   { src: hidro,   alt: "Hidroginástica" },
   { src: karate,  alt: "Karatê" },
@@ -14,12 +20,34 @@ const slides = [
   { src: fisio,   alt: "Fisioterapia" },
 ];
 
+const slidesMobile = [
+  { src: hidroMobile,   alt: "Hidroginástica" },
+  { src: informatica,   alt: "Informática" },
+  { src: natacaoMobile, alt: "Natação" },
+  { src: psicanalise,   alt: "Psicanálise" },
+  { src: whatsapp,      alt: "Atividade" },
+];
+
 export function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
-  const next = useCallback(() => setCurrent((i) => (i + 1) % slides.length), []);
-  const prev = useCallback(() => setCurrent((i) => (i === 0 ? slides.length - 1 : i - 1)), []);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 600px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      setCurrent(0);
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const activeSlides = isMobile ? slidesMobile : slides;
+
+  const next = useCallback(() => setCurrent((i) => (i + 1) % activeSlides.length), [activeSlides.length]);
+  const prev = useCallback(() => setCurrent((i) => (i === 0 ? activeSlides.length - 1 : i - 1)), [activeSlides.length]);
 
   useEffect(() => {
     const id = setInterval(next, 4000);
@@ -37,7 +65,7 @@ export function HeroSlider() {
 
   return (
     <div className="hs-root" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-      {slides.map((s, i) => (
+      {activeSlides.map((s, i) => (
         <div
           key={i}
           className={`hs-slide${i === current ? " hs-slide--active" : ""}`}
@@ -59,7 +87,7 @@ export function HeroSlider() {
       <button className="hs-arrow hs-arrow--right" onClick={next} aria-label="Próximo">&#8594;</button>
 
       <div className="hs-dots">
-        {slides.map((_, i) => (
+        {activeSlides.map((_, i) => (
           <button
             key={i}
             className={`hs-dot${i === current ? " hs-dot--on" : ""}`}

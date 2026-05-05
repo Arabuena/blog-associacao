@@ -10,6 +10,8 @@ import cicinho from "@/components/OUTROS/cicinho.png";
 import informaticaImg from "@/components/OUTROS/Design sem nome (3).png";
 import logoHeader2 from "@/components/IMAGES/HEADER/logo2.png";
 import otalmoImg from "@/components/IMAGES/HEADER/otalmo.png";
+import fachada from "@/components/fachada.jpeg";
+import inauguracao from "@/components/inauguracao.jpeg";
 import { HeroSlider } from "@/components/HeroSlider";
 
 type PdfPage = { page: number; text: string; image: string | null };
@@ -133,13 +135,13 @@ export default function Home() {
             </div>
             <div className="t-card t-sobre-reel-card">
               <div className="t-sobre-reel-clip">
-                <iframe
-                  src="https://www.instagram.com/reel/DXK4snEEVir/embed/"
-                  className="t-sobre-reel-frame"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  allowFullScreen
-                  title="Reel Associação Amigo do Povo"
-                  scrolling="no"
+                <Image
+                  src={fachada}
+                  alt="Fachada da Associação Amigo do Povo"
+                  fill
+                  style={{ objectFit: "cover", borderRadius: "0.75rem" }}
+                  sizes="(max-width:600px) 100vw, 420px"
+                  priority
                 />
               </div>
             </div>
@@ -155,14 +157,15 @@ export default function Home() {
             <h2 className="t-h2">Inauguração da Associação</h2>
             <p className="t-body" style={{ maxWidth: "62ch" }}>{p.inaug?.text}</p>
           </div>
-          <div className="t-inaug-grid">
-            {[p.inaug, p.escol1, p.escol2, p.expand, p.info, p.bomb].map((item, i) =>
-              item?.image ? (
-                <div key={i} className="t-inaug-photo">
-                  <Image src={item.image} alt={item.text || `Registro ${i + 1}`} width={600} height={400} className="w-full h-full object-cover" />
-                </div>
-              ) : null
-            )}
+          <div style={{ marginTop: "2rem", borderRadius: "1rem", overflow: "hidden", maxWidth: "860px", margin: "2rem auto 0" }}>
+            <Image
+              src={inauguracao}
+              alt="Inauguração da Associação Amigo do Povo"
+              width={1200}
+              height={800}
+              style={{ width: "100%", height: "auto", display: "block" }}
+              priority
+            />
           </div>
         </div>
       </section>
